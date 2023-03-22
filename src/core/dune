@@ -29,6 +29,7 @@
 
 (rule
   (targets version)
+  (mode    fallback)
   (deps    ../../shell/get_version.ml ../../configure.ac)
   (action  (with-stdout-to %{targets} (run ocaml ../../shell/get_version.ml ../../configure.ac))))
 
