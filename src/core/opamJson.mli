@@ -26,4 +26,4 @@ val flush: out_channel -> unit
 
 val to_string : ?minify:bool -> t -> string
 
-val of_string: ?encoding:Jsonm.encoding -> string -> t option
+val of_string: ?encoding:'a -> string -> t option
