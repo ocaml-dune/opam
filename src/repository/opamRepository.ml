@@ -267,20 +267,7 @@ let pull_tree_t
     | _ ->
       fun archive msg ->
         OpamFilename.with_tmp_dir_job @@ fun tmpdir ->
-        let copies () =
-          OpamParallel.map ~jobs:3
-            ~command:(fun (label, local_dirname, _subpath) ->
-                let text = OpamProcess.make_command_text label label in
-                OpamProcess.Job.with_text text @@
-                (try
-                   OpamFilename.cleandir local_dirname;
-                   OpamFilename.copy_dir ~src:tmpdir ~dst:local_dirname;
-                   Done (Up_to_date label)
-                 with OpamSystem.Process_error r ->
-                   Done (Not_available
-                           (Some label, OpamProcess.result_summary r))))
-            dirnames
-        in
+        let copies () = failwith "stubbed out" in
         OpamFilename.extract_job archive tmpdir
         @@+ fallback (fun () ->
             let failing =

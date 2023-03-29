@@ -127,7 +127,7 @@ type package_flag =
 (** At some point we want to abstract so that the same functions can be used
     over CUDF and OPAM packages *)
 module type GenericPackage = sig
-  include OpamParallel.VERTEX
+  type t
   val name_to_string: t -> string
   val version_to_string: t -> string
 end
