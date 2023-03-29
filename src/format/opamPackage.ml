@@ -173,8 +173,6 @@ module O = struct
   let compare p1 p2 =
     let r = Name.compare p1.name p2.name in
     if r = 0 then Version.compare p1.version p2.version else r
-  let hash = hash
-  let equal = equal
   let to_string = to_string
   let to_json = to_json
   let of_json = of_json
@@ -318,5 +316,3 @@ let max_version set name =
   let versions = versions_of_name set name in
   let version = Version.Set.max_elt versions in
   create name version
-
-module Graph = (OpamParallel.MakeGraph (O) : OpamParallel.GRAPH with type V.t = t)

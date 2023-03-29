@@ -136,6 +136,3 @@ val list: OpamFilename.Dir.t -> Set.t
 val prefixes: OpamFilename.Dir.t -> string option Map.t
 
 (** {2 Errors} *)
-
-(** Parallel executions. *)
-module Graph: OpamParallel.GRAPH with type V.t = t
