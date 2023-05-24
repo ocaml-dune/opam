@@ -530,7 +530,7 @@ let eval_string gt ?(set_opamswitch=false) switch =
     let opamroot_env =
       OpamStd.Option.Op.(
         OpamStateConfig.E.root () +!
-        OpamFilename.Dir.to_string OpamStateConfig.(default.root_dir)
+        OpamFilename.Dir.to_string OpamStateConfig.(Lazy.force default.root_dir)
       ) in
     if opamroot_cur <> opamroot_env then
       Some opamroot_cur
