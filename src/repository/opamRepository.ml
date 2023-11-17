@@ -405,12 +405,14 @@ let pull_file label ?cache_dir ?(cache_urls=[])  ?(silent_hits=false)
           | _, Up_to_date _ -> assert false
           | _, Result (Some f) -> OpamFilename.move ~src:f ~dst:file; Result ()
           | _, Result None -> let m = "is a directory" in Not_available (Some m, m)
+          | _, (Checksum_mismatch _ as na) -> na
           | _, (Not_available _ as na) -> na)
 
 let pull_file_to_cache label ~cache_dir ?(cache_urls=[]) checksums remote_urls =
   let text = OpamProcess.make_command_text label "dl" in
   OpamProcess.Job.with_text text @@
   fetch_from_cache cache_dir cache_urls checksums @@+ function
+  | Checksum_mismatch e -> Done (Checksum_mismatch e)
   | Up_to_date (_, _) ->
     Done (Up_to_date "cached")
   | Result (_, url) ->
